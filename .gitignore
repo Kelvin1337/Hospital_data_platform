@@ -1,0 +1,5 @@
+# dbt
+target/
+logs/
+
+
