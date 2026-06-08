@@ -100,9 +100,9 @@ hospital_data_platform/
 ├── analyses/
 ├── macros/
 ├── models/
-│   ├── bronze/
-│   ├── silver/
-│   └── gold/
+│   ├── camada_bronze/
+│   ├── camada_prata/
+│   └── camada_bouro/
 │
 ├── seeds/
 ├── snapshots/
@@ -158,10 +158,8 @@ dbt docs serve
 
 ## Próximas Melhorias
 
-* Implementação completa das camadas Bronze, Silver e Gold;
 * Data Quality Tests;
 * Snapshots para histórico de alterações;
-* Integração com Power BI;
 * Pipeline CI/CD com GitHub Actions;
 * Monitoramento e observabilidade dos pipelines;
 * Modelagem dimensional para Analytics.
