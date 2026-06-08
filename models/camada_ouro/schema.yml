@@ -1,0 +1,114 @@
+version: 2
+
+models:
+  - name: dim_medicos
+    description: "Tabela dimensão contendo a lista única de médicos do hospital."
+    columns:
+      - name: id_medico
+        description: "Chave primária numérica sequencial do médico."
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_hospitais
+    description: "Tabela dimensão contendo a lista única de hospitais."
+    columns:
+      - name: id_hospital
+        description: "Chave primária numérica sequencial do hospital."
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_pacientes
+    description: "Tabela dimensão contendo a lista única de pacientes do hospital."
+    columns:
+      - name: id_paciente
+        description: "Chave primária numérica sequencial do paciente."
+        tests:
+          - unique
+          - not_null
+
+      - name: nome_paciente
+        description: "Nome completo do paciente padronizado em maiúsculo."
+
+      - name: idade_paciente
+        description: "Idade do paciente."
+
+      - name: sexo_paciente
+        description: "Gênero simplificado do paciente (M/F)."
+
+      - name: faixa_etaria
+        description: "Classificação etária (Criança, Adulto, Idoso) gerada automaticamente via macro."
+
+  - name: dim_medicamentos
+    description: "Tabela dimensão com a lista única de medicamentos prescritos."
+    columns:
+      - name: id_medicamento
+        description: "Chave primária numérica sequencial do medicamento."
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_seguradoras
+    description: "Tabela dimensão com a lista única de operadoras de planos de saúde."
+    columns:
+      - name: id_seguradora
+        description: "Chave primária numérica sequencial da seguradora."
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_internacoes
+    description: "Tabela fato que centraliza todos os eventos de internação e faturamento."
+    columns:
+      - name: fk_paciente
+        description: "Chave estrangeira para a dimensão de pacientes."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_pacientes')
+              field: id_paciente
+
+      - name: fk_medico
+        description: "Chave estrangeira para a dimensão de médicos."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_medicos')
+              field: id_medico
+
+      - name: fk_hospital
+        description: "Chave estrangeira para a dimensão de hospitais."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_hospitais')
+              field: id_hospital
+
+      - name: fk_medicamento
+        description: "Chave estrangeira para a dimensão de medicamentos."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_medicamentos')
+              field: id_medicamento
+
+      - name: fk_seguradora
+        description: "Chave estrangeira para a dimensão de seguradoras."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_seguradoras')
+              field: id_seguradora
+
+      - name: resultado_testes
+        description: "Resultado padronizado dos exames do paciente."
+        tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - 'NORMAL'
+                  - 'ANORMAL'
+                  - 'INCONCLUSIVO'
+                  - 'NÃO INFORMADO'
+

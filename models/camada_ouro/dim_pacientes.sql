@@ -1,11 +1,30 @@
-WITH pacientes AS (
-    -- Seleciona os pacientes de forma única primeiro
-    SELECT DISTINCT pacientes 
+WITH pacientes_unicos AS (
+    SELECT 
+        nome_paciente,
+        idade_paciente,
+        sexo_paciente,
+        tipo_sanguineo
     FROM {{ ref('stg_pacientes') }}
+    GROUP BY nome_paciente, idade_paciente, sexo_paciente, tipo_sanguineo
+),
+
+pacientes_posicionados AS (
+    SELECT
+        ROW_NUMBER() OVER (ORDER BY nome_paciente) AS id_paciente,
+        nome_paciente,
+        idade_paciente,
+        sexo_paciente,
+        tipo_sanguineo
+    FROM pacientes_unicos
 )
 
-SELECT
-    -- Gera o ID numérico sequencial (1, 2, 3...)
-    ROW_NUMBER() OVER (ORDER BY pacientes) AS id_paciente,
-    pacientes                              AS nome_paciente
-FROM pacientes
+SELECT 
+    id_paciente,
+    nome_paciente,
+    idade_paciente,
+    sexo_paciente,
+    tipo_sanguineo,
+    -- Chamando a macro de forma limpa:
+    {{ categorizar_grupo_idade('idade_paciente') }} AS faixa_etaria
+FROM pacientes_posicionados
+ORDER BY id_paciente

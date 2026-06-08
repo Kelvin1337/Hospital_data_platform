@@ -3,3 +3,13 @@ target/
 logs/
 
 
+# Python
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+
+# Streamlit/Env
+.streamlit/secrets.toml
+dbt-env/
