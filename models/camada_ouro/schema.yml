@@ -112,3 +112,8 @@ models:
                   - 'INCONCLUSIVO'
                   - 'NÃO INFORMADO'
 
+      - columns:
+          - name: id_internacao
+            tests:
+              - unique
+              - not_null
