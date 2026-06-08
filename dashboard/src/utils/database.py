@@ -2,9 +2,7 @@ import streamlit as st
 import snowflake.connector
 import pandas as pd
 
-@st.cache_resource
 def get_connection():
-    """Mantém a conexão com o Snowflake ativa em cache rodando em segundo plano"""
     return snowflake.connector.connect(
         user=st.secrets["user"],
         password=st.secrets["password"],
@@ -13,25 +11,18 @@ def get_connection():
         database=st.secrets["database"],
         schema=st.secrets["schema"]
     )
-
-@st.cache_data(ttl=600)  # Cache de dados por 10 minutos para não estourar o orçamento do Snowflake
-def run_query(sql: str) -> pd.DataFrame:
-    """Executa a query e higieniza as colunas convertendo-as para minúsculo"""
+@st.cache_data(ttl=3600) # Guarda o resultado por 1 hora na memória do Streamlit
+def run_query(query):
     try:
         conn = get_connection()
-        df = pd.read_sql(sql, conn)
+        df = pd.read_sql(query, conn)
+        conn.close()
         
+        # Transforma todas as colunas do Snowflake em minúsculo
         if df is not None and not df.empty:
-            df.columns = df.columns.str.lower()  # Padroniza maiúsculas do Snowflake para minúsculas
+            df.columns = df.columns.str.lower()
+            
         return df
     except Exception as e:
-        st.error(f"Erro na execução da query: {e}")
+        st.error(f"Erro na execução da query: '{e}'")
         return pd.DataFrame()
-
-def format_number(value):
-    """Formata números para o padrão brasileiro (ex: 1.500)"""
-    try:
-        value = float(value)
-        return f"{value:,.0f}".replace(",", ".")
-    except:
-        return "0"

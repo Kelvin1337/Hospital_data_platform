@@ -40,25 +40,42 @@ with col1:
     if not doencas.empty:
         fig1 = px.bar(
             doencas, 
-            x="qtd",                      # Invertemos os eixos para barras horizontais (fica mais elegante para textos longos)
+            x="qtd",                      
             y="condicoes_medicas", 
-            text_auto='.s',
+            text_auto=True,
             orientation='h',
             labels={"condicoes_medicas": "Diagnóstico", "qtd": "Casos"},
             color="qtd",
-            color_continuous_scale="Tealgrn" # Paleta puxada para o verde hospitalar/teal
+            color_continuous_scale="Electric" # 🌈 Transição ultra colorida do roxo ao amarelo neon
         )
         fig1.update_layout(
             template="plotly_dark",
             showlegend=False,
             coloraxis_showscale=False,
-            yaxis={'categoryorder':'total ascending'}, # Ordena a maior barra para o topo
+            yaxis={'categoryorder':'total ascending'}, 
             xaxis=dict(showgrid=True, gridcolor="#262730"),
             height=400
         )
         st.plotly_chart(fig1, use_container_width=True)
-    else:
-        st.info("Sem dados de condições médicas.")
+
+with col2:
+    st.subheader("Resultados dos Testes")
+    if not testes.empty:
+        fig2 = px.pie(
+            testes, 
+            names="resultado_testes", 
+            values="qtd",
+            hole=0.5,
+            # Forçamos uma lista de cores puras e muito vivas para a rosca se destacar
+            color_discrete_sequence=["#FF007F", "#00E5FF", "#7000FF", "#FFB703"]
+        )
+        fig2.update_traces(textinfo='percent+label', marker=dict(line=dict(color='#0E1117', width=2)))
+        fig2.update_layout(
+            template="plotly_dark",
+            legend=dict(orientation="h", yanchor="bottom", y=-0.1, xanchor="center", x=0.5),
+            height=400
+        )
+        st.plotly_chart(fig2, use_container_width=True)
 
 with col2:
     st.subheader("Resultados dos Testes Laboratoriais")
