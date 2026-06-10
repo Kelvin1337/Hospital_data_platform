@@ -1,28 +1,40 @@
-# Hospital Data Platform
+# 🏥 Hospital Data Platform
 
-![GitHub repo size](https://img.shields.io/github/repo-size/Kelvin1337/hospital_data_platform)
-![GitHub language count](https://img.shields.io/github/languages/count/Kelvin1337/hospital_data_platform)
-![GitHub last commit](https://img.shields.io/github/last-commit/Kelvin1337/hospital_data_platform)
+![GitHub repo size](https://img.shields.io/github/repo-size/Kelvin1337/Hospital_data_platform?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/Kelvin1337/Hospital_data_platform?style=for-the-badge)
+![GitHub last commit](https://img.shields.io/github/last-commit/Kelvin1337/Hospital_data_platform?style=for-the-badge)
 
-## Plataforma de Dados Hospitalares
+<img src="dashboard/assets/dashboard_preview.png" alt="Screenshot do Projeto">
 
-Sistema de Engenharia de Dados desenvolvido para simular um ambiente corporativo de processamento e transformação de dados hospitalares utilizando **dbt**, **Snowflake** e **SQL**.
+> Plataforma de dados desenvolvida para simular um ambiente corporativo hospitalar utilizando Engenharia de Dados, Analytics Engineering e Business Intelligence.
+> O projeto implementa uma arquitetura moderna em camadas (Bronze → Silver → Gold), transformando dados brutos em informações analíticas confiáveis através de dbt, Snowflake e Streamlit.
 
-O projeto aplica conceitos modernos de **Data Engineering** e **Analytics Engineering**, transformando dados brutos em informações confiáveis para análises operacionais e estratégicas através da arquitetura em camadas **Bronze → Silver → Gold**.
+## 🔄 Funcionalidades e Melhorias
 
----
+O projeto foi desenvolvido com as seguintes funcionalidades:
 
-## Objetivos do Projeto
+* [x] Ingestão de dados utilizando dbt Seeds;
+* [x] Arquitetura de dados em camadas Bronze, Silver e Gold;
+* [x] Tratamento e padronização de dados hospitalares;
+* [x] Remoção de duplicidades e tratamento de valores nulos;
+* [x] Aplicação de regras de negócio utilizando SQL e dbt;
+* [x] Construção de modelos analíticos para tomada de decisão;
+* [x] Testes de qualidade e consistência dos dados;
+* [x] Armazenamento e processamento em Snowflake;
+* [x] Dashboards interativos desenvolvidos em Streamlit;
+* [x] Versionamento completo utilizando Git e GitHub.
 
-* Construir uma arquitetura de dados escalável;
-* Simular um ambiente real de Engenharia de Dados;
-* Aplicar boas práticas de modelagem e governança de dados;
-* Garantir qualidade e consistência das informações;
-* Disponibilizar dados prontos para consumo analítico.
+## 💻 Pré-requisitos
 
----
+Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
-## Arquitetura de Dados
+* Python 3.10+
+* dbt Core
+* Conta Snowflake
+* Git instalado
+* Visual Studio Code (opcional)
+
+## 🏗️ Arquitetura do Projeto
 
 ### 🥉 Bronze Layer
 
@@ -33,11 +45,11 @@ Principais características:
 * Dados sem tratamento;
 * Preservação da informação original;
 * Histórico completo dos registros;
-* Fonte para as próximas etapas do pipeline.
+* Base para as próximas etapas do pipeline.
 
-### Silver Layer
+### 🥈 Silver Layer
 
-Camada de tratamento e padronização dos dados.
+Camada responsável pela limpeza, padronização e enriquecimento dos dados.
 
 Principais atividades:
 
@@ -47,7 +59,7 @@ Principais atividades:
 * Tratamento de valores nulos;
 * Aplicação de regras de negócio.
 
-### Gold Layer
+### 🥇 Gold Layer
 
 Camada analítica destinada ao consumo por dashboards e relatórios.
 
@@ -58,75 +70,96 @@ Principais entregas:
 * Visões analíticas;
 * Dados prontos para BI.
 
----
-
-## Funcionalidades Implementadas
-
-* Estruturação de projeto dbt;
-* Ingestão de dados via Seeds;
-* Organização em camadas Bronze, Silver e Gold;
-* Transformações SQL com dbt;
-* Versionamento utilizando Git e GitHub;
-* Modelagem de dados para ambiente hospitalar;
-* Aplicação de boas práticas de Engenharia de Dados.
-
----
-
-## Tecnologias Utilizadas
+## ⚙️ Tecnologias Utilizadas
 
 ### Engenharia de Dados
 
-* dbt Core
 * Snowflake
+* dbt Core
 * SQL
 
-### Versionamento
+### Visualização de Dados
 
-* Git
-* GitHub
+* Streamlit
+* Plotly
 
-### Ambiente de Desenvolvimento
+### Desenvolvimento
 
 * Python
+* Git
+* GitHub
 * Visual Studio Code
 
----
+## 📁 Estrutura do Projeto
 
+```text
 ## 📁 Estrutura do Projeto
 
 ```text
 hospital_data_platform/
 │
+├── .devcontainer/
+│
 ├── analyses/
+│
+├── dashboard/
+│   ├── .streamlit/
+│   │   └── config.toml
+│   │
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── filters.py
+│   │   │   └── kpi.py
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── 1_Visao_Executiva.py
+│   │   │   ├── 2_Hospitais.py
+│   │   │   ├── 3_Medicos.py
+│   │   │   ├── 4_Clinico.py
+│   │   │   └── formatters.py
+│   │   │
+│   │   └── utils/
+│   │       ├── __init__.py
+│   │       ├── database.py
+│   │       └── formatters.py
+│   │
+│   ├── __init__.py
+│   └── main.py
+│
 ├── macros/
+│   ├── categorizar_grupo_idade.sql
+│   └── gerar_nome_schema.sql
+│
 ├── models/
 │   ├── camada_bronze/
 │   ├── camada_prata/
-│   └── camada_bouro/
+│   └── camada_ouro/
 │
 ├── seeds/
+│
 ├── snapshots/
+│
 ├── tests/
+│   └── valida_datas_internacao.sql
 │
 ├── dbt_project.yml
 ├── README.md
 └── .gitignore
 ```
 
----
 
-## Como Executar
+## 🚀 Como Executar
 
 ### Clonar o Repositório
 
 ```bash
-git clone https://github.com/Kelvin1337/hospital_data_platform.git
+git clone https://github.com/Kelvin1337/Hospital_data_platform.git
 ```
 
 ### Acessar o Projeto
 
 ```bash
-cd hospital_data_platform
+cd Hospital_data_platform
 ```
 
 ### Carregar os Seeds
@@ -154,22 +187,38 @@ dbt docs generate
 dbt docs serve
 ```
 
----
+## 📊 Dashboard
 
-## Próximas Melhorias
+O projeto disponibiliza dashboards interativos para acompanhamento de indicadores hospitalares, permitindo análises executivas, operacionais e de qualidade dos dados.
 
-* Data Quality Tests;
-* Snapshots para histórico de alterações;
-* Pipeline CI/CD com GitHub Actions;
-* Monitoramento e observabilidade dos pipelines;
-* Modelagem dimensional para Analytics.
+Principais módulos:
 
----
+* Visão Executiva
+* Hospitais
+* Médicos
+* Indicadores Clínicos
+* Qualidade dos Dados
 
-## Autor
+## 🔮 Próximas Melhorias
+
+* [ ] Pipeline CI/CD com GitHub Actions;
+* [ ] Monitoramento e observabilidade dos pipelines;
+* [ ] Testes automatizados adicionais no dbt.
+
+## 😄 Seja um dos contribuidores
+
+Quer contribuir com o projeto?
+
+Faça um fork do repositório, implemente melhorias e envie um Pull Request.
+
+## 👨‍💻 Autor
 
 **Kelvin Silva**
 
-Engenheiro de Dados em formação com foco em Engenharia de Dados, Analytics Engineering, Cloud Computing e soluções modernas de processamento de dados.
+Engenheiro de Dados com foco em Engenharia de Dados, Analytics Engineering, Cloud Computing e soluções modernas para plataformas de dados.
 
-GitHub: https://github.com/Kelvin1337
+GitHub:
+https://github.com/Kelvin1337
+
+LinkedIn:
+https://www.linkedin.com/in/kelvin-da-silva-s-866061211/
