@@ -70,19 +70,27 @@ if df_kpis is not None and not df_kpis.empty:
 
 # --- GRÁFICO 1: Evolução das Internações (Azul Elétrico Neon) ---
 st.subheader("Evolução temporal de internações")
-fig_internacoes = px.line(
+fig_internacoes = px.area(
     df_evolucao,
     x="mes",
     y="qtd_internacoes",
-    labels={"mes": "Tempo", "qtd_internacoes": "Quantidade"}
+    labels={
+        "mes": "Tempo",
+        "qtd_internacoes": "Quantidade"
+    }
 )
-# Linha grossa azul cyan brilhante com marcadores nos pontos
-fig_internacoes.update_traces(line=dict(color="#00E5FF", width=3), mode="lines+markers", marker=dict(size=6))
+
+fig_internacoes.update_traces(
+    line=dict(color="#2563EB", width=3),
+    marker=dict(size=6),
+    fillcolor="rgba(37,99,235,0.20)"
+)
+
 fig_internacoes.update_layout(
     template="plotly_dark",
     xaxis=dict(showgrid=True, gridcolor="#262730"),
     yaxis=dict(showgrid=True, gridcolor="#262730"),
-    height=300
+    height=400
 )
 st.plotly_chart(fig_internacoes, use_container_width=True)
 
@@ -97,11 +105,16 @@ fig_faturamento = px.area(  # Mudamos para área preenchida para dar mais volume
     labels={"mes": "Tempo", "faturamento": "Faturamento (R$)"}
 )
 # Linha magenta com preenchimento gradiente sutil abaixo dela
-fig_faturamento.update_traces(line=dict(color="#FF007F", width=3), fillcolor="rgba(255, 0, 127, 0.2)")
+
+fig_faturamento.update_traces(
+    line=dict(color="#10B981", width=3),
+    fillcolor="rgba(16,185,129,0.20)"
+)
+
 fig_faturamento.update_layout(
     template="plotly_dark",
     xaxis=dict(showgrid=True, gridcolor="#262730"),
     yaxis=dict(showgrid=True, gridcolor="#262730"),
-    height=300
+    height=400
 )
 st.plotly_chart(fig_faturamento, use_container_width=True)
