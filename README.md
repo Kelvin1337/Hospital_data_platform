@@ -7,7 +7,6 @@
 <img src="dashboard/assets/dashboard_preview.png" alt="Screenshot do Projeto">
 
 > Plataforma de dados desenvolvida para simular um ambiente corporativo hospitalar utilizando Engenharia de Dados, Analytics Engineering e Business Intelligence.
->
 > O projeto implementa uma arquitetura moderna em camadas (Bronze → Silver → Gold), transformando dados brutos em informações analíticas confiáveis através de dbt, Snowflake e Streamlit.
 
 ## 🔄 Funcionalidades e Melhorias
