@@ -4,7 +4,7 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/Kelvin1337/Hospital_data_platform?style=for-the-badge)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Kelvin1337/Hospital_data_platform?style=for-the-badge)
 
-<img src="dashboard/assets/dashboard_preview" alt="Screenshot do Projeto">
+<img src="dashboard/assets/dashboard_preview.png" alt="Screenshot do Projeto">
 
 > Plataforma de dados desenvolvida para simular um ambiente corporativo hospitalar utilizando Engenharia de Dados, Analytics Engineering e Business Intelligence.
 > O projeto implementa uma arquitetura moderna em camadas (Bronze → Silver → Gold), transformando dados brutos em informações analíticas confiáveis através de dbt, Snowflake e Streamlit.
